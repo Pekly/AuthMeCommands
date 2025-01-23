@@ -1,34 +1,33 @@
-name: Build AuthMeCommands Plugin
+name: Build AuthMeCommands
 
 on:
   push:
     branches:
-      - main  # Trigger the build on pushing to the main branch (or another branch you prefer)
+      - main
   pull_request:
     branches:
-      - main  # Trigger the build when a pull request is created to the main branch
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Runs the build on a fresh Ubuntu VM
-    
+    runs-on: ubuntu-latest
+
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2  # This fetches your code from GitHub to the CI environment
-    
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up JDK 21
-      uses: actions/setup-java@v2  # This step sets up Java
+      uses: actions/setup-java@v3
       with:
-        java-version: '21'  # Specifies that we are using JDK 21
-    
+        distribution: 'adoptopenjdk'  # You can use "adoptopenjdk" or other distributions like "zulu"
+        java-version: '21'
+        cache: 'maven'
+
     - name: Build with Maven
-      run: mvn clean package -DskipTests  # Use Maven to build the plugin (adjust if you're using Gradle)
-      
-    # If you're using Gradle instead, use the following (uncomment this block):
-    # - name: Build with Gradle
-    #   run: ./gradlew build  # If you're using Gradle to build the plugin
-    
-    - name: Upload .jar to GitHub Release
-      uses: softprops/action-gh-release@v1  # This uploads the generated .jar to the GitHub release page
+      run: mvn clean package
+
+    - name: Upload JAR file
+      uses: actions/upload-artifact@v2
       with:
-        files: target/*.jar  # Adjust this path if you're using Gradle or another build directory
+        name: AuthMeCommands
+        path: target/AuthMeCommands-1.0-SNAPSHOT.jar
