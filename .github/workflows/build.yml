@@ -27,7 +27,7 @@ jobs:
       run: mvn clean package
 
     - name: Upload JAR file
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3  # Updated to v3
       with:
         name: AuthMeCommands
         path: target/AuthMeCommands-1.0-SNAPSHOT.jar
