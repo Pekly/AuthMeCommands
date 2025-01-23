@@ -1,0 +1,13 @@
+name: AuthMeCommands
+version: 1.0
+author: Pekly
+main: me.pekly.authmecommands.AuthMeCommands
+api-version: 1.19
+commands:
+  authmecommands:
+    description: A plugin that runs commands based on AuthMe events
+    usage: /<command>
+permissions:
+  authmecommands.use:
+    description: Allows usage of commands in AuthMeCommands plugin
+    default: true

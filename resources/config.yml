@@ -1,0 +1,13 @@
+# Config file for the AuthMeCommands plugin
+
+# A list of commands that will be run after a player logs in
+# {player} will be replaced by the player's name
+commands-on-login:
+    - "/send {player} spawn"
+    - "/teleport {player} hub"
+  
+  # A list of commands that will be run after a player registers
+  # {player} will be replaced by the player's name
+  commands-on-register:
+    - "/send {player} welcome"
+    - "/teleport {player} start"  
