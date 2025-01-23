@@ -19,7 +19,7 @@ jobs:
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
-        distribution: 'adoptopenjdk'  # You can use "adoptopenjdk" or other distributions like "zulu"
+        distribution: 'temurin'  # Use 'temurin' instead of 'adoptopenjdk'
         java-version: '21'
         cache: 'maven'
 
@@ -27,7 +27,7 @@ jobs:
       run: mvn clean package
 
     - name: Upload JAR file
-      uses: actions/upload-artifact@v3  # Updated to v3
+      uses: actions/upload-artifact@v3
       with:
         name: AuthMeCommands
         path: target/AuthMeCommands-1.0-SNAPSHOT.jar
