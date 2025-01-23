@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '21'
-        distribution: 'adoptopenjdk'
+        distribution: 'adoptium'
 
     - name: Install AuthMe dependency locally
       run: |
