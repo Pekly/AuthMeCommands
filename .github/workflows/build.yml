@@ -1,4 +1,4 @@
-name: Build AuthMeCommands
+name: Build AuthMeCommands Plugin
 
 on:
   push:
@@ -11,23 +11,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up JDK 21
+    - name: Set up Java JDK 21
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'  # Use 'temurin' instead of 'adoptopenjdk'
         java-version: '21'
-        cache: 'maven'
+        distribution: 'adoptopenjdk'
 
-    - name: Build with Maven
+    - name: Install AuthMe dependency locally
+      run: |
+        # Download the AuthMe JAR
+        curl -L -o authme-5.6.0.jar https://github.com/AuthMe/AuthMeReloaded/releases/download/5.6.0/AuthMe-5.6.0.jar
+        
+        # Install AuthMe JAR into Maven local repository
+        mvn install:install-file -Dfile=authme-5.6.0.jar -DgroupId=pl.betoncraft -DartifactId=authme -Dversion=5.6.0 -Dpackaging=jar
+
+    - name: Build plugin with Maven
       run: mvn clean package
 
-    - name: Upload JAR file
+    - name: Upload JAR Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: AuthMeCommands
+        name: authme-commands-jar
         path: target/AuthMeCommands-1.0-SNAPSHOT.jar
