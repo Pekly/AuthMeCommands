@@ -16,11 +16,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Java JDK 21
+    - name: Set up Java JDK 21 (Temurin)
       uses: actions/setup-java@v3
       with:
         java-version: '21'
-        distribution: 'openjdk'
+        distribution: 'temurin'
 
     - name: Install AuthMe dependency locally
       run: |
