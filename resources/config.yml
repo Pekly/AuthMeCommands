@@ -1,13 +1,24 @@
-# Config file for the AuthMeCommands plugin
-
-# A list of commands that will be run after a player logs in
-# {player} will be replaced by the player's name
 commands-on-login:
-    - "/send {player} spawn"
-    - "/teleport {player} hub"
-  
-  # A list of commands that will be run after a player registers
-  # {player} will be replaced by the player's name
-  commands-on-register:
-    - "/send {player} welcome"
-    - "/teleport {player} start"  
+  - "say {player} has logged in!"
+  - "warp spawn {player}"
+
+commands-on-register:
+  - "say {player} has registered!"
+  - "warp tutorial {player}"
+
+login-messages:
+  - "§aWelcome back, {player}!"
+  - "§eCheck out the new updates, {player}!"
+
+register-messages:
+  - "§bWelcome, {player}! Please check your email."
+  - "§fMake sure to set up your profile."
+
+send-login-messages: true
+send-register-messages: true
+run-login-commands: true
+run-register-commands: true
+command-delay: 1000  # 1 second delay for commands
+message-delay: 1000  # 1 second delay for messages
+command-cooldown: 60000  # 1-minute cooldown for commands
+message-cooldown: 60000  # 1-minute cooldown for messages
