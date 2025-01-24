@@ -44,7 +44,8 @@ public class AuthMeCommands extends JavaPlugin implements Listener {
         // Initialize AuthMeApi instance
         AuthMe authMePlugin = (AuthMe) Bukkit.getPluginManager().getPlugin("AuthMe");  // Get the AuthMe plugin instance
         if (authMePlugin != null) {
-            authMeApi = authMePlugin.getApi();  // Use AuthMeApi directly
+            // Accessing the API directly using the singleton pattern
+            authMeApi = authMePlugin.getAPI();  // Updated to use getAPI()
         } else {
             getLogger().warning("AuthMe plugin not found!");
         }
