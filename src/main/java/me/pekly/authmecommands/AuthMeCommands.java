@@ -2,12 +2,6 @@ package me.pekly.authmecommands;
 
 import fr.xephi.authme.api.v3.AuthMeApi;
 import fr.xephi.authme.AuthMe;
-import fr.xephi.authme.datasource.DataSource;
-import fr.xephi.authme.data.auth.PlayerCache;
-import fr.xephi.authme.security.PasswordSecurity;
-import fr.xephi.authme.process.Management;
-import fr.xephi.authme.service.ValidationService;
-import fr.xephi.authme.service.GeoIpService;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -18,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AuthMeCommands extends JavaPlugin implements Listener {
@@ -51,8 +44,7 @@ public class AuthMeCommands extends JavaPlugin implements Listener {
         // Initialize AuthMeApi instance
         AuthMe authMePlugin = (AuthMe) Bukkit.getPluginManager().getPlugin("AuthMe");  // Get the AuthMe plugin instance
         if (authMePlugin != null) {
-            authMeApi = new AuthMeApi(authMePlugin, authMePlugin.getDataSource(), authMePlugin.getPlayerCache(), authMePlugin.getPasswordSecurity(), 
-                    authMePlugin.getManagement(), authMePlugin.getValidationService(), authMePlugin.getGeoIpService());
+            authMeApi = authMePlugin.getApi();  // Use AuthMeApi directly
         } else {
             getLogger().warning("AuthMe plugin not found!");
         }
@@ -97,7 +89,7 @@ public class AuthMeCommands extends JavaPlugin implements Listener {
         Player player = event.getPlayer();
 
         // Check if the player is registered
-        if (authMeApi.isRegistered(player.getName())) {
+        if (authMeApi.isRegistered(player)) {
             if (authMeApi.isAuthenticated(player)) {
                 // If logged in, run login commands and send login messages
                 if (runLoginCommands) {
