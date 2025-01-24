@@ -22,14 +22,6 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    - name: Install AuthMe dependency locally
-      run: |
-        # Download the AuthMe JAR
-        curl -L -o authme-5.6.0.jar https://github.com/AuthMe/AuthMeReloaded/releases/download/5.6.0/AuthMe-5.6.0.jar
-        
-        # Install AuthMe JAR into Maven local repository
-        mvn install:install-file -Dfile=authme-5.6.0.jar -DgroupId=pl.betoncraft -DartifactId=authme -Dversion=5.6.0 -Dpackaging=jar
-
     - name: Build plugin with Maven
       run: mvn clean package
 
